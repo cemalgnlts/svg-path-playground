@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+		<meta name="description" content="Preview the SVG Path feature, get visual help.">
+		<title>SVG Path Playground</title>
+		<link href="base.css" rel="stylesheet">
+		<script src="main.js" type="module"></script>
+	</head>
+	<body>
+		<nav>
+			<h1>SVG Path Playground</h1>
+		</nav>
+		
+		<main>
+			<div class="box">
+				<div class="box__title">
+					<span>Editor</span>
+					
+					<svg fill="currentColor" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" id="questionMark">
+						<path clip-rule="evenodd" fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z"></path>
+					</svg>
+				</div>
+				
+				<textarea class="editor" spellcheck="false" placeholder="M 5 5"></textarea>
+			</div>
+
+			<div class="box">
+				<p class="box__title">
+					<span>Preview</span>
+					<label>Size: <input type="number" value="20" class="inp-size"></label>
+				</p>
+				
+				<svg width="0" height="100%" stroke-width="0.1" fill="none" class="preview">
+					<defs>
+						<pattern x="0" y="0" width="1" height="1" id="checkered" patternUnits="userSpaceOnUse">
+							<line x1="1" y1="0" x2="1" y2="1"/>
+							<line x1="0" y1="1" x2="1" y2="1"/>
+						</pattern>
+						<pattern x="0" y="0" width="5" height="5" id="checkered-step" patternUnits="userSpaceOnUse">
+							<rect x="0" y="0" width="5" height="5" fill="url(#checkered)"/>
+							<line x1="5" y1="0" x2="5" y2="5"/>
+							<line x1="0" y1="5" x2="5" y2="5"/>
+						</pattern>
+					</defs>
+					
+					<!-- Background -->
+					<g>
+						<!-- Border -->
+						<rect x="0" y="0" width="20" height="20" fill="url(#checkered-step)" id="border"/>
+
+						<!-- X-Axis -->
+						<g class="preview__axis-text" font-size="0.5" stroke="none" text-anchor="middle" dominant-baseline="middle">
+							<!-- Dynamic Content -->
+						</g>
+
+						<!-- Y-Axis -->
+						<g class="preview__axis-text" font-size="0.5" stroke="none" text-anchor="end" dominant-baseline="middle">
+							<!-- Dynamic Content -->
+						</g>
+					</g>
+					<!-- /Background -->
+					
+					<!-- Preview -->
+					<g stroke="0.2" class="preview__result">
+						<path id="userPath"/>
+					</g>
+					<!-- /Preview -->
+					
+					<!-- Debug -->
+					<g>
+						<!-- Helper visuals -->
+						<g class="preview__helper-drawings" font-size="0.5" text-anchor="middle" dominant-baseline="text-before-edge">
+							<!-- Dynamic Content -->
+						</g>
+					</g>
+					<!-- /Debug -->
+					
+				</svg>
+			</div>
+		</main>
+		
+		<div class="dialog">
+			<div class="dialog__content">
+				<h2>How to use</h2>
+				
+				<svg width="20" height="20" stroke-linecap="round" id="dlgClose">
+					<circle cx="10" cy="10" r="10" fill="currentColor"/>
+					<path d="M6 6, L14, 14 M14, 6 L6, 14" style="stroke: var(--bg)"/>
+				</svg>
+				
+				<p>The editor was sensitive to the commands typed, you should type in the following format:</p>
+				<code>[Function] [Commands] [Commands]
+					[Function] [Commands]
+					...
+				</code>
+
+				<p>Example:</p>
+				<code>M 5 5
+					h 5
+					v 5
+					h -5
+					z
+				</code>
+				
+				<p>Wrong!!!</p>
+				<code>M5 5
+					h 5 v 5
+				</code>
+				
+				<p>Inspiration: <a href="https://www.nan.fyi/svg-paths" target="_blank">nan.fyi/svg-paths</a></p>
+			</div>
+		</div>
+		
+		<footer>
+			<a href="https://github.com/cemalgnlts/svg-path-playground" target="_blank">GitHub</a>
+		</footer>
+	</body>
+</html>
